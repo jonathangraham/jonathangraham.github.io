@@ -2,19 +2,21 @@
 
 Easily publish Bootstrap 3 powered Jekyll sites.  
 Fork of the well known jekyll-bootstrap (v0.3.0). Original project is [here](https://github.com/plusjade/jekyll-bootstrap).  
-The quickest way to start and publish your Jekyll powered blog. 100% compatible with GitHub pages.  
+The quickest way to start and publish your Jekyll powered blog. 100% compatible with GitHub pages.
+
+A big shout out and thank you to [Dean Wampler](https://github.com/deanwampler/), whose website design I borowed heavily from to get started.  
 
 ## Usage
 
 ### 1. Create a Repo
-- Go to <https://github.com> and create a new repository named *USERNAME.github.io*  
+- Go to <https://github.com> and create a new repository named *USERNAME.github.com*  
 
 ### 2. Install Jekyll-Bootstrap-3  
 <pre>
   <code>
-    $ git clone https://github.com/dbtek/jekyll-bootstrap-3 USERNAME.github.io
+    $ git clone https://github.com/dbtek/jekyll-bootstrap-3 USERNAME.github.com
     $ cd USERNAME.github.com
-    $ git remote set-url origin git@github.com:USERNAME/USERNAME.github.io.git
+    $ git remote set-url origin git@github.com:USERNAME/USERNAME.github.com.git
     $ git push origin master  
   </code>
 </pre>  

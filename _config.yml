@@ -1,9 +1,12 @@
 # This is the default format.
 # For more see: http://jekyllrb.com/docs/permalinks/
 permalink: /:categories/:year/:month/:day/:title
-
-exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
+include: []
+exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md", "tmp"]
 highlighter: pygments
+
+gems:
+  - jekyll-redirect-from
 
 # https://help.github.com/articles/migrating-your-pages-site-from-maruku
 markdown: kramdown
@@ -11,14 +14,13 @@ markdown: kramdown
 # Themes are encouraged to use these universal variables
 # so be sure to set them if your theme uses them.
 #
-title : Jekyll Bootstrap-3
-tagline: Site Tagline
+title : Jonathan Graham
+tagline: Code and Music; Science and Art
 author :
-  name : Name Lastname
-  email : blah@email.test
-  github : username
-  twitter : username
-  feedburner : feedname
+  name : Jonathan Graham
+  email : sendthistojon@gmail.com
+  github : jonathangraham
+  twitter : graham_jp
 
 # The production_url is only used when full-domain names are needed
 # such as sitemap.txt
@@ -28,7 +30,7 @@ author :
 # Else if you are pushing to username.github.io, replace with your username.
 # Finally if you are pushing to a GitHub project page, include the project name at the end.
 #
-production_url : http://username.github.io
+production_url : http://jonathangraham.github.io
 
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
@@ -101,19 +103,9 @@ JB :
   # Set 'provider' to false to turn analytics off globally.
   #
   analytics :
-    provider : google
+    provider : 
     google :
-        tracking_id : 'UA-***'
-    googleUA :
-        tracking_id : 'UA-***'
-        property_name : 'PROPERTY NAME'
-    getclicky :
-      site_id : 
-    mixpanel :
-        token : '_MIXPANEL_TOKEN_'
-    piwik :
-        baseURL : 'myserver.tld/piwik' # Piwik installation address (without protocol)
-        idsite : '1'                   # the id of the site on Piwik
+        tracking_id : 
 
   # Settings for sharing helper.
   # Sharing is for things like tweet, plusone, like, reddit buttons etc.
@@ -133,4 +125,4 @@ JB :
   # and include your custom code. Your custom file must be defined at:
   #   ./_includes/custom/[HELPER]
   # where [HELPER] is the name of the helper you are overriding.
-  
+
