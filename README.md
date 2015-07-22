@@ -37,3 +37,4 @@ Quickly install and use lovely themes with Jekyll Bootstrap 3. Visit [theme gall
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/dbtek/jekyll-bootstrap-3/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
+# MinedMines.github.io
