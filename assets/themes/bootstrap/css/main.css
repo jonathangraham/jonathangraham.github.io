@@ -22,6 +22,7 @@ footer {
   text-align: center;
 }
 
+
 h1, h2, h3, h4 {
   font-family: "Lato", sans-serif;
   font-weight: 900;
@@ -264,6 +265,7 @@ section {
   width: 50%;
   padding: 0 15px;
   float: left;
+  text-align: center;
 }
 
 

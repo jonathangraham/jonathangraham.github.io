@@ -7,6 +7,14 @@ body {
 
 .background-image {
   background-image: url("/assets/images/JG2.png");
+  background-repeat: no-repeat; /*repeat;*/
+  background-size: cover; /*contain;*/
+  background-attachment: fixed;
+  height: 100vh;
+}
+
+.blog1-image {
+  background-image: url("/assets/images/CodeFace.jpg");
   /*background-image: url("/assets/images/MountEvansAndMountBierstadtFromGuanellaPassNearDusk1200x842.jpg");*/
   background-repeat: no-repeat; /*repeat;*/
   background-size: cover; /*contain;*/

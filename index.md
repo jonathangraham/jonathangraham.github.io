@@ -7,8 +7,21 @@ include_social: true
 {% include JB/setup %}
 
 <section id="research" class="centered">
-  <p class="section-title"><span>Interests</span></p>
-  <p>Life is short and opportunities are many.<br><br> My interests cover a melting pot of code, music, science and art, and this site will cover all of them. Sometimes the topics will be discrete, but often they will involve a mixture of disciplines and I'll try to unveil the magic as I go. Hopefully there will be something that interests you along the way!</p>
+  <p class="section-title"><span>Blogs</span></p>
+  <p>Life is short and opportunities are many.<br><br> My interests cover a melting pot of code, music, science and art, and these blogs will cover all of them. Sometimes the topics will be discrete, but often they will involve a delicious mixture of them. Hopefully there will be something that interests you along the way!</p>
+</section>
+<section>
+  <ul class="research">
+    Recent blogs:<br> 
+    {% for post in site.posts limit: 5%}
+      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+    <br><br>See the full list of blogs <a href="blog.html">here</a>
+  </ul>
+</section>
+<section id="research" class="centered">
+  <p class="section-title"><span>Background</span></p>
+  <p>A little about my current state:</p>
   <article class="research-item">
     <h2>Code</h2>
     <p>It was through music that I was first exposed to code, and where I saw just how powerful and flexible a tool programming was. The more I spoke with top-notch software developers, the more I realised the limitless opportunities that there were to do new and awesome things. And so I have taken the plunge and switched my career to one of code. A career that has many overlaps with science, music and art, and a career that I am excitely getting fully immersed in. <br><br> Currently, I am expanding my programming abilities from procedural hobby code to one of structured professional quality through an apprenticeship position at <a href="http://8thlight.com">8th Light</a>. I am also co-founder of <a href="https://www.facebook.com/MinedMinds">Mined Minds</a>, bringing free computer programming training to Greene County, PA. </p>
