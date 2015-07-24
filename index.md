@@ -16,7 +16,7 @@ include_social: true
     {% for post in site.posts limit: 5%}
       <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
     {% endfor %}
-    <br><br>See the full list of blogs <a href="blog.html">here</a>
+    <br><br>See the full list of blogs <a href="../blog.html">here</a>
   </ul>
 </section>
 <section id="research" class="centered">
