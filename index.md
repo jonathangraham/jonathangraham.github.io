@@ -24,14 +24,14 @@ include_social: true
   <p>A little about my current state:</p>
   <article class="research-item">
     <h2>Code</h2>
-    <p>It was through music that I was first exposed to code, and where I saw just how powerful and flexible a tool programming was. The more I spoke with top-notch software developers, the more I realised the limitless opportunities that there were to do new and awesome things. And so I have taken the plunge and switched my career to one of code. A career that has many overlaps with science, music and art, and a career that I am excitely getting fully immersed in. <br><br> Currently, I am expanding my programming abilities from procedural hobby code to one of structured professional quality through an apprenticeship position at <a href="http://8thlight.com">8th Light</a>. I am also co-founder of <a href="https://www.facebook.com/MinedMinds">Mined Minds</a>, bringing free computer programming training to Greene County, PA. </p>
+    <p>It was through music that I was first exposed to code, and where I saw just how powerful and flexible a tool programming was. The more I spoke with top-notch software developers, the more I realised the limitless opportunities that there were to do new and awesome things. And so I have taken the plunge and switched my career to one of code. A career that has many overlaps with science, music and art, and a career that I am excitedly getting fully immersed in. <br><br> Currently, I am expanding my programming abilities from procedural hobby code to one of structured professional quality through an apprenticeship position at <a href="http://8thlight.com">8th Light</a>. I am also co-founder of <a href="http://minedminds.github.io/">Mined Minds</a>, bringing free computer programming training to Greene County, PA. </p>
     <div class="more">
       <a href="code.html" class="button">programming</a>
     </div>
   </article>
   <article class="research-item">
     <h2>Music</h2>
-    <p>Having a club-full of revellers dancing to the music you are creating live through the typing of code is a truly amazing experience, and one that I would recommend to everyone! <br><br>As <a href="http://meta-ex.com">Meta-eX</a> we harnessed the power of SuperCollider through the Overtone platform to generate music, be it gently evolving soundscapes or pulsating beats, through the writing of Clojure code. <br><br>I have also played live solo gigs using <a href="http://sonic-pi.net">SonicPi</a>, and have also used the tool to teach programming concepts to non-programmers of all ages.</p>
+    <p>Having a club-full of revellers dancing to the music you are creating live through the writing of code is a truly amazing experience, and one that I would recommend to everyone! <br><br>As <a href="http://meta-ex.com">Meta-eX</a>, we harnessed the power of SuperCollider through the Overtone platform to generate music, be it gently evolving soundscapes or pulsating beats, by writing Clojure code in the Emacs Live text editor. <br><br>I have also played live solo gigs using <a href="http://sonic-pi.net">SonicPi</a>, and have used this tool to teach programming concepts to non-programmers of all ages.</p>
     <div class="more">
       <a href="music.html/" class="button">music</a>
       <br><br><br><br><br><br>
