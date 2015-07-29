@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Mining Minds to Provide a Path into Programming
-tagline: Lets bring the opportunities of code to everyone 
+tagline: Bringing the Opportunities of Code to Everyone 
 include_social: true
 image: blog1-image
 ---

@@ -15,18 +15,20 @@ body {
 
 .blog1-image {
   background-image: url("/assets/images/CodeFace.jpg");
-  /*background-image: url("/assets/images/MountEvansAndMountBierstadtFromGuanellaPassNearDusk1200x842.jpg");*/
   background-repeat: no-repeat; /*repeat;*/
   background-size: cover; /*contain;*/
   background-attachment: fixed;
   height: 100vh;
 }
 
-.prog-scala-cover-cell {
-  /*background-image: url("/assets/images/prog_scala_2ed_comp-quarter_size.jpg");*/
-  width:  262px;
-  height: 344px;
+ .living-clojure-image {
+  background-image: url("/assets/images/living_clojure.jpeg");
+  background-repeat: no-repeat; /*repeat;*/
+  background-size: cover; /*contain;*/
+  background-attachment: fixed;
+  height: 100vh;
 }
+
 
 .basic-table {
   width: 90%;

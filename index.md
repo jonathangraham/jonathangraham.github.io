@@ -14,7 +14,7 @@ include_social: true
   <ul class="research">
     Recent blogs:<br> 
     {% for post in site.posts limit: 5%}
-      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}: {{ post.tagline }}</a></li>
     {% endfor %}
     <br><br>See the full list of blogs <a href="../blog.html">here</a>
   </ul>
@@ -34,7 +34,7 @@ include_social: true
       <h2>Music</h2>
       <p>Having a club-full of revellers dancing to the music you are creating live through the writing of code is a truly amazing experience, and one that I would recommend to everyone! <br><br>As <a href="http://meta-ex.com">Meta-eX</a>, we harnessed the power of SuperCollider through the Overtone platform to generate music, be it gently evolving soundscapes or pulsating beats, by writing Clojure code in the Emacs Live text editor. <br><br>I have also played live solo gigs using <a href="http://sonic-pi.net">SonicPi</a>, and have used this tool to teach programming concepts to non-programmers of all ages.</p>
       <div class="more">
-        <a href="music.html/" class="button">music</a>
+        <a href="music.html" class="button">music</a>
       </div>
     </article>
   </section>
