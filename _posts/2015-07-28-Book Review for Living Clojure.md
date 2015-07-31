@@ -31,11 +31,12 @@ A lot is covered quickly in this chapter, and at the end Carin advises not to wo
 <br><br>
 <b>Creating Web Applications with Clojure:</b> It may not be the most exciting of examples, but Chapter 7 gives you everything that you need to build your own Web App. Follow through the example and you will have the basic project structure and also a knowledge of how it all works together, which will serve you well as a starting point for whatever you want to build. It starts off by creating a compojure project, which gives us a minimal web server, before including Ring-JSON middleware to enable us to handle JSON responses. Next, we look at ClojureScript, enabling us to use Clojure in the browser as well as on the server, and then we include cljs-http so that we can use the power of <i>core.async</i> to handle HTTP calls asynchronously.
 <br><br>
-I found that in order to make the example work I had to make some changes to the default middleware settings in the <i>handler.clj</i> file, so that the keys were returned as keywords rather than strings. To do this I removed <code>[ring.middleware.defaults :refer [wrap-defaults site-defaults]]</code> from the <code>:require</code> list and added <code>{:keywords? true}</code> to <code>ring-json/wrap-json-response</code> in <code>app</code>. This then gives the following for the <i>handler.clj</i> file:
+I found that in order to make the example work I had to make some changes to the default middleware settings in the <i>handler.clj</i> file, so that the keys were returned as keywords rather than strings. To do this I added <code>{:keywords? true}</code> to <code>ring-json/wrap-json-response</code> in <code>app</code>. This then gives the following for the <i>handler.clj</i> file:
 <pre><code>(ns cheshire-cat.handler
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
             [ring.middleware.json :as ring-json]
+            [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
             [ring.util.response :as rr]))
 
 (defroutes app-routes
