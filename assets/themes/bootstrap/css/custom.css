@@ -29,6 +29,14 @@ body {
   height: 100vh;
 }
 
+ .SonicPi-image {
+  background-image: url("/assets/images/SonicPiImage.png");
+  background-repeat: no-repeat; /*repeat;*/
+  background-size: cover; /*contain;*/
+  background-attachment: fixed;
+  height: 100vh;
+}
+
 
 .basic-table {
   width: 90%;

@@ -7,6 +7,8 @@ image: living-clojure-image
 ---
 {% include JB/setup %}
 
+<b>EDIT 10 Aug 2015:</b> The section on <i>Creating Web Applications with Clojure</i> (Chapter 7) has been updated to provide an explanation and remedy for an issue in the exercise. 
+<br><br><br>
 <b>Living Clojure</b> is writen by <a href="https://twitter.com/gigasquid">Carin Meier</a>, and was published in April 2015 by <a href= "http://shop.oreilly.com/product/0636920034292.do">O'Reilly</a>. The book is available in print and ebook format, and I read the print version, which <a href="https://8thlight.com/">8th Light</a> bought for me to study.
 <br><br>
 The book's tagline is <i>An Introduction and Training Plan for Developers</i>, and its target audience is experienced programmers who have not worked in Clojure before. Would I consider myself an experienced programmer? Not yet, but I have some experience in several languages, and on reading the <a href="http://cdn.oreillystatic.com/oreilly/booksamplers/9781491909041_sampler.pdf">free sample chapter</a> I decided that the book would be gentle enough to allow me to follow. And I have worked in Clojure before. In fact, Clojure was the first programming language that I experienced, and I coded it live on stage as <a href="http://meta-ex.com/">Meta-eX</a>. At the time, however, I only learnt how to manipulate existing code, and not how to create well structured programs. Having now switched careers to one of a software developer, I was eager to learn what <i>Living Clojure</i> was really about.
@@ -31,27 +33,27 @@ A lot is covered quickly in this chapter, and at the end Carin advises not to wo
 <br><br>
 <b>Creating Web Applications with Clojure:</b> It may not be the most exciting of examples, but Chapter 7 gives you everything that you need to build your own Web App. Follow through the example and you will have the basic project structure and also a knowledge of how it all works together, which will serve you well as a starting point for whatever you want to build. It starts off by creating a compojure project, which gives us a minimal web server, before including Ring-JSON middleware to enable us to handle JSON responses. Next, we look at ClojureScript, enabling us to use Clojure in the browser as well as on the server, and then we include cljs-http so that we can use the power of <i>core.async</i> to handle HTTP calls asynchronously.
 <br><br>
-I found that in order to make the example work I had to make some changes to the default middleware settings in the <i>handler.clj</i> file, so that the keys were returned as keywords rather than strings. To do this I added <code>{:keywords? true}</code> to <code>ring-json/wrap-json-response</code> in <code>app</code>. This then gives the following for the <i>handler.clj</i> file:
+I initially had a problem that my keys were returned as strings rather than keywords, and this resulted in the alert containing my JSON response returning <code>{"name":"Cheshire Cat","status":"grinning"}</code>, rather than <code>{:name "Cheshire Cat", :status "grinning"}</code>. After reading about the issue I thought that I needed to make changes to the default middleware settings in the <i>handler.clj</i> file, by adding <code>{:keywords? true}</code> to <code>ring-json/wrap-json-response</code> in <code>app</code>. However, it turns out that the issue results from the order that the <code>app-routes</code> in the <i>handler.clj</i> file are wrapped by the site-defaults and automatic JSON response. When this is first shown in the book (in the section <i>Using JSON with the Cheshire Library and Ring</i>, p119 of the paper book), the <code>app-routes</code> are first wrapped by the site-defaults and then by the automatic JSON response. This leads to the keys being returned as strings, since the JSON response is not wrapped in the site-defaults. However, if you change the order of the wrappers the keys are returned as keywords, as required. The correct order is actually given in the book when the entire <i>handler.clj</i> file is shown:
 <pre><code>(ns cheshire-cat.handler
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
-            [ring.middleware.json :as ring-json]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
+            [ring.middleware.json :as ring-json]
             [ring.util.response :as rr]))
 
 (defroutes app-routes
   (GET "/" [] "Hello World")
   (GET "/cheshire-cat" []
-  	(rr/response {:name "Cheshire Cat" :status :grinning}))
+      (rr/response {:name "Cheshire Cat" :status :grinning}))
   (route/not-found "Not Found"))
 
 (def app
-	(-> app-routes
-		(ring-json/wrap-json-response {:keywords? true})
-    (wrap-defaults site-defaults)
-    ))</code></pre>
+  (-> app-routes
+    (ring-json/wrap-json-response)
+    (wrap-defaults site-defaults)))</code></pre> 
 
-Finally, we use the Enfocus library to update our webpage with the data we want to display and to apply event handling and effects. The final version of our web app just displays a couple of words that then fade out at different rates, but the final few pages of the chapter point to other libraries and resources that will help you on your way to designing killer apps.
+
+With the correction made, we can use the Enfocus library to update our webpage with the data we want to display and to apply event handling and effects. The final version of our web app just displays a couple of words that then fade out at different rates, but the final few pages of the chapter point to other libraries and resources that will help you on your way to designing killer apps.
 <br><br>
 <b>The Power of Macros:</b> The final chapter in Part I covers macros. Some core Clojure expressions, such as <code>when</code>, are macros, and it's good going back to the source code to understand how they work. The take-home messages for me from this chapter are that macros are great for pattern encapsulation and for adding language features, but that they can easily be misused. For now, I have decided to keep this feature in my back-pocket, but it is there ready for me to pull out when the need arises.
 <br><br>
