@@ -37,6 +37,14 @@ body {
   height: 100vh;
 }
 
+ .Clojure-image {
+  background-image: url("/assets/images/Clojure.png");
+  background-repeat: no-repeat; /*repeat;*/
+  background-size: cover; /*contain;*/
+  background-attachment: fixed;
+  height: 100vh;
+}
+
 
 .basic-table {
   width: 90%;
