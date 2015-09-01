@@ -86,7 +86,7 @@ Let's write a new test:
 <pre><code>	(it "result 1 for addition function with no val and list containing element 1"
 		(should= 1 (my-reduce + [1])))</code></pre>
 
-This fails becuase the wrong number of arguments are passed to ```my-reduce```. To fix this, we can add in an option for ```my-reduce``` to just take in ```f``` and ```coll```, and then for it to call ```my-reduce``` passing ```(first coll)``` as ```val```, and ```(rest coll)``` as ```coll```. We have already written our ```my-reduce``` in a way to cope with an empty ```coll```, so this should work as long as we have at least one item in our collection.
+This fails becuase the wrong number of arguments are passed to ```my-reduce```. To fix this, we can add in an arity for ```my-reduce``` to just take in ```f``` and ```coll```, and then for it to call ```my-reduce``` passing ```(first coll)``` as ```val```, and ```(rest coll)``` as ```coll```. We have already written our ```my-reduce``` in a way to cope with an empty ```coll```, so this should work as long as we have at least one item in our collection.
 
 <pre><code>(defn my-reduce
 	([f coll]
@@ -226,7 +226,8 @@ We can write a first test, where we use the predicate ```zero?``` (will return t
 		(should= clojure.lang.LazySeq (class (my-filter zero? [])))
 		(should= 0 (my-count (my-filter zero? []))))</code></pre> 
 
-We can get these tests to pass just by returning ```(lazy-seq coll)```, which will convert the input collection to a lazy sequence. We can modify or extend our tests to confirm that this works with all clojure collections, including lists, maps, sets and strings.
+We can get these tests to pass just by returning ```(lazy-seq coll)```. The clojure function <a href="https://clojuredocs.org/clojure.core/lazy-seq">lazy-seq</a> <i>takes a body of expressions that returns an ISeq or nil, and yields a Seqable object that will invoke the body only the first time seq
+is called, and will cache the result and return it on all subsequent seq calls.</i> We can modify or extend our tests to confirm that this works with all clojure collections, including lists, maps, sets and strings.
 
 Let's now add a test that is going to filter a collection that contains items:
 
@@ -261,11 +262,11 @@ This passes, and we can add some further tests to check that our implementation 
 
 The tests pass, but we are just converting the ```result``` to a lazy sequence at the end, whereas the real purpose of using a lazy seq is so that the computation can be <a href="http://noobtuts.com/clojure/being-lazy-in-clojure">lazy</a>.
 
-We could move our lazy-seq to in front of the recur loop, but we would still not be behaving lazily. Every time we loop through we evaluate if the predicate is true, and we update our ```result``` accordingly. If we were lazy we would not evaluate until we reached the tail of the recursion.
+We could move our lazy-seq to the front of the recur loop, but we would still not be behaving lazily. Every time we loop through we evaluate if the predicate is true, and we update our ```result``` accordingly. If we were lazy we would not evaluate until we reached the tail of the recursion.
 
 In terms of laziness, there is a <a href="http://stackoverflow.com/questions/12389303/clojure-cons-vs-conj-with-lazy-seq">difference between ```conj``` and ```cons```</a>. The behaviour of ```conj``` depends on the collection type, so will need to be realised immediately. However, ```cons``` adds an item to the start of a collection, with everything else coming after, and so can be evaluated lazily. 
 
-Let's re-write our ```my-filter``` function so that it is lazy. We can start with ```lazy-seq```, and follow this by a ```when``` block, using the predicate ```(seq coll)```. This will return true if the ```coll``` is a sequence, and so will return false for empty collections, in which case ```lazy-seq``` will be evaluated. If we do have a sequence we want to apply the predicate to the first item of the collection. If the predicate returns true we want to ```cons``` the ```(first coll)``` onto the filtered collection to come, ```(my-filter pred (rest coll))```. If the predicate returns false then we simply recall ```my-filter``` with the ```(rest coll)```. Nothing will get evaluated until we reach the tail of the recursion, when the collection is empty. If we put this altogether we get:
+Let's re-write our ```my-filter``` function so that it is lazy. We can start with ```lazy-seq``` and pass it a ```when``` block, using the predicate ```(seq coll)```, as it's body of expression. The clojure function <a href="https://clojuredocs.org/clojure.core/seq">seq</a> <i>returns a seq on the collection. If the collection is empty it returns nil, and (seq nil) returns nil.</i> So, the ``when``` block will exit with an empty collection. If we do have a sequence we want to apply the filter predicate to the first item of the collection. If the predicate returns true we want to ```cons``` the ```(first coll)``` onto the filtered collection to come, ```(my-filter pred (rest coll))```. If the predicate returns false then we simply call ```my-filter``` with the ```(rest coll)```. Nothing will get evaluated until we reach the tail of the recursion, when the collection is empty. If we put this altogether we get:
 
 <pre><code>(defn my-filter [pred coll]
 	(lazy-seq 
@@ -467,7 +468,13 @@ To make the function work in parallel we need to generate all of the futures bef
 
 Our tests now pass! Indeed, our implementation ```my-pmap``` completes the test in just over 1 s, compared to 4 s for ```map```, so we could change our test requirement to return in less than 1.1 s.
 
-Let's now make sure that ```my-pmap``` can work with multiple collections. We can write tests that will map a function over two collections and check that they return the correct result and in a time that confirms the functions were applied in parallel.
+Does what we are doing in ```results``` look familiar? We are taking an input collection, applying a function to each element in turn, and returning a single item - a vector. We know that we can perform this type of data manipulation with ```my-reduce```, so let's refactor. Our initial ```val``` is the empty vector, and we want to ```conj``` the ```future``` of applying ```f``` to each element of the ```coll``` into ```val```.
+
+<pre><code>(defn my-pmap [f coll]
+		(let [results (my-reduce #(conj %1 (future (f %2))) [] coll)]
+			(my-map deref results)))</code></pre> 
+
+Our refactored code using ```my-reduce``` looks cleaner, and the tests still pass. Let's now make sure that ```my-pmap``` can work with multiple collections. We can write tests that will map a function over two collections and check that they return the correct result and in a time that confirms the functions were applied in parallel.
 
 <pre><code>	(it "maps two vectors"
 		(should= '(14 16) (my-pmap long-running-job [1 2] [3 4])))
@@ -479,14 +486,10 @@ We could get these tests to pass simply by extending ```my-pmap``` to take two c
 
 <pre><code>(defn my-pmap
 	([f coll]
-		(let [results
-			(loop [remaining coll acc []]
-				(if (seq remaining)
-					(recur (rest remaining) (conj acc (future (f (first remaining)))))
-					acc))]
+		(let [results (my-reduce #(conj %1 (future (f %2))) [] coll)]
 			(my-map deref results)))
 	([f c1 & colls]
-     		(my-pmap #(apply f %) (reorder (cons c1 colls)))))</code></pre>
+    		(my-pmap #(apply f %) (reorder (cons c1 colls)))))</code></pre>
 
 This works, and we can extend our test suite to ensure that it continues to work with more collections.
 
