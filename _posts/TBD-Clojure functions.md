@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Implementation of Clojure Functions
-tagline: Understanding reduce, count, filter, map and pmap   
+title: Understanding core Clojure Functions
+tagline: Implementing versions of <a href="#reduce">reduce</a>, <a href="#count">count</a>, <a href="#filter">filter</a>, <a href="#map">map</a> and <a href="#pmap">pmap</a>   
 include_social: true
 image: Clojure-image
 ---
@@ -11,19 +11,20 @@ Every programming language has a bunch of core functions already defined for us.
 
 This power and ease of use does come with a cost, though. Do we really understand how the functions are working, and if not, how do we really know the power of the magic that we are wielding? Are we in danger of breaking our code through the misuse of functionality that we thought, but didn't truly, understand? And are we utilizing the functions to their full effect, or missing out on some of the benefits of the language?
 
-Lets consider, for a moment, <a href="https://en.wikipedia.org/wiki/BASE_jumping">BASE jumping</a>, and lets assume that you are quite the thrill-seeker and an avid skydiver. You have jumped from a plane many times, and feel in full control, from the free-fall, through chute deployment, and onto landing. You understand your equipment, and are confident in how to maintain and prepare it, how to operate it, and how to ensure safety as you use it.
+Lets consider, for a moment, <a href="https://en.wikipedia.org/wiki/BASE_jumping">BASE jumping</a>, and lets assume that you are quite the thrill-seeker and an avid skydiver. You have jumped from a plane many times. You feel in full control from the initial leap, through free-fall and chute deployment, and onto landing. You understand your equipment; you are confident in how to maintain and prepare it, how to operate it, and how to ensure safety as you use it.
 
-But, do you really understand your equipment? Do you know the opportunities that it provides, and the limitations of its use? Are you missing out on the ultimate thrill of BASE jumping because you don't realise that the parachute you already have will do the job? Or are you in severe danger, because you think your equipment will work the same, no matter the altitude of the jump, but you don't fully understand all of the constraints?
+But, do you really understand your equipment? Do you know the opportunities that it provides, and the limitations of its use? Are you missing out on the ultimate thrill of BASE jumping because you don't realise that the parachute you already have will do the job? Or are you in severe danger because you think your equipment will work the same no matter the altitude of the jump, and you don't fully understand all of the constraints?
 
-Before we take our first BASE jump, lets look at some clojure code. If clojure is new to you, then take a look at <a href="http://jonathangraham.github.io/2015/07/28/Book%20Review%20for%20Living%20Clojure/">my book review of Living Clojure</a> and get up to speed. In this post we are going to look at some core clojure functions, and implement versions of them ourselves. The aim is not to exactly replicate how the functions are already written, but to get an understanding of exactly what they can and cannot do. There are multiple ways of doing everything, and I have tried to maintain a consistent approach that focuses on the fundementals of clojure.
+Before we take our first BASE jump, let's look at some clojure code. If clojure is new to you, then take a look at <a href="http://jonathangraham.github.io/2015/07/28/Book%20Review%20for%20Living%20Clojure/">my book review of Living Clojure</a> and get up to speed. In this post we are going to look at some core clojure functions, and implement versions of them ourselves. The aim is not to exactly replicate how the functions are already written, but to get an understanding of what they can and cannot do. We will build things up slowly, starting with <a href="#reduce">reduce</a>, before moving to <a href="#count">count</a>, <a href="#filter">filter</a>, <a href="#map">map</a> and <a href="#pmap">pmap</a>. 
 
-Lets start up a new Leiningen project. I like the testing framework of <a href="http://speclj.com">speclj</a>, so <code>lein new specjls clojure_functions</code> got me started...
+Let's start up a new Leiningen project. I like the testing framework of <a href="http://speclj.com">speclj</a>, so <code>lein new specjls clojure_functions</code> got me started...
 
+<a name="reduce"></a>
 <b>REDUCE</b> 
 
 First up we will implement our own version of ```reduce```, because it is the backbone of many clojure seq functions. Looking at the requirements for <a href="https://clojuredocs.org/clojure.core/reduce">reduce</a> there is quite a lot that we need it to do. It needs a function, which we'll call ```f```, which takes 2 arguments, but it can also just accept one. 
 
-Let's start by taking the case with two arguments, the first is the starting value, ```val``` and the second is a collection, ```coll```. ```reduce``` will apply ```f``` to the ```val``` and the first element of ```coll```, and then will apply ```f``` to that result and the second item of ```coll```, etc. This sounds easily solved with a recursive function, but we'll build it up slowly. Firstly, the documentation tells us that if ```coll``` contains no items it should just return ```val```, and not apply ```f```. Let's start by writing a test - I'm using <a href="http://speclj.com">speclj</a>, so if you are using lein test or a different testing framework then the syntax will be slightly different. We're going to write a test with the function ```+```, an initial ```val``` of 1, and an empty list. We expect this to just return ```val```, so should output 1.
+Let's start by taking the case with two arguments. The first argument is the starting value, ```val``` and the second is a collection, ```coll```. ```reduce``` will apply ```f``` to the ```val``` and the first element of ```coll```, and then will apply ```f``` to that result and the second item of ```coll```, etc. This sounds easily solved with a recursive function, but we'll build it up slowly. Firstly, the documentation tells us that if ```coll``` contains no items it should just return ```val```, and not apply ```f```. Let's start by writing a test - I'm using <a href="http://speclj.com">speclj</a>, so if you are using lein test or a different testing framework then the syntax will be different. We're going to write a test with the function ```+```, an initial ```val``` of 1, and an empty list. We expect this to just return ```val```, so should output 1.
 
 <pre><code>(describe "test my-reduce function"
 
@@ -65,7 +66,7 @@ This now fails, so to get it to pass we need to recursively call ```my-reduce```
 		val
 		(my-reduce f (f val (first coll)) (rest coll))))
 </code></pre>
-Tests all back working, so let's add a few more examples of reduce and check that our implementation handles them:
+The tests are all back working, so let's add a few more examples of reduce and check that our implementation handles them:
 
 <pre><code>	(it "convert a vector to a set"
 		(should= #{:a :b :c} (my-reduce conj #{} [:a :b :c])))
@@ -91,7 +92,7 @@ This fails becuase the wrong number of arguments are passed to ```my-reduce```. 
 	([f coll]
 		 (my-reduce f (first coll) (rest coll)))
 	([f val coll]
-	(if (empty? coll)
+		(if (empty? coll)
 			val
 			(my-reduce f (f val (first coll)) (rest coll)))))</code></pre>
 
@@ -105,13 +106,13 @@ This works as we wanted, and the test passes. We can add some additional tests t
 
 Finally, what happens if we pass in no ```val``` and an empty ```coll```? We need to return the result of calling ```f``` with no arguments. Evaluating ```+``` with no arguments returns 0, and evaluating ```*``` with no arguments returns 1. Let's add these tests.
 
-<pre><code>(it "result 0 for addition on empty list"
-	; 	(should= 0 (my-reduce + [])))
+<pre><code>	(it "result 0 for addition on empty list"
+		(should= 0 (my-reduce + [])))
 
-	; (it "result 1 for multiplication on empty list"
-	; 	(should= 1 (my-reduce * [])))</code></pre>
+	(it "result 1 for multiplication on empty list"
+		(should= 1 (my-reduce * [])))</code></pre>
 
-We simply need to make our version of ```my-reduce``` that takes ```f``` and ```coll``` to evaluate ```f``` if the ```coll``` is empty.
+To make these tests pass we simply need to make our version of ```my-reduce``` that takes ```f``` and ```coll``` to evaluate ```f``` if the ```coll``` is empty.
 
 <pre><code>(defn my-reduce
 	([f coll]
@@ -127,8 +128,9 @@ So, now we've written our own implementation of ```reduce```, do we still want t
 
 If we previously thought that we needed to pass an initial value as well as a collection to ```reduce```, we now have extended the power and utility we wield over this fundamental function. Also, even if we have a function that requires two arguments, we now know that we can successfully pass this to ```reduce```. Let's say we define a simple function ```f``` as ```(defn f [x y] (+ x y))```. If we call ```f``` with just one argument, say ```(f [1])``` we will get an error. However, we now know that calling ```(reduce f [1])``` will return ```1```, because the first item of the collection will be defined as ```val```, and given the rest of the collection is empty, ```reduce``` will just return ```val```.  
 
-But we also now know some of the limitations of ```reduce```. Consider the situation where we define our ```coll``` as being a vector, which contains a random number, between 0 and 2, of elements, which will be consecutive integer values starting at 0: ```(def coll (into [] (range (rand-int 3))))```. We will not pass a ```val``` to ```reduce```, and we're going to pass in ```+``` as ```f```. So, what happens when we call ```reduce```? If we pass ```[0 1]``` as ```coll```, we will return the value 1, having applied ```+``` to the elements. If we pass ```[0]``` we will return 0, given there is only one element and so ```f``` is not called. What if we pass in ```[]```? We are passing an empty collection, so we just evaluate ```f```, which returns 0 in this case. All good. But what if we set ```-``` as our function? This will return -1 if we pass ```[0 1]```, and 0 if we pass ```[0]```, but will cause an error if we try to pass ```[]```, given it is not possible to evaluate ```-``` with no arguments. So, if we want to use ```reduce``` where there is a possiblity that we will be passing in an empty collection and no initial value, then we had better make sure that we define a function that can be evaluated with no arguments. Alternatively, we know now that we can write our own ```reduce``` function, and we can modify it so that it defines differently what to do with an empty collection.
+But we also now know some of the limitations of ```reduce```. Consider the situation where we define our ```coll``` as being a vector that contains a random number of elements, between 0 and 2, with the elements being consecutive integer values starting at 0: ```(def coll (into [] (range (rand-int 3))))```. We will not pass a ```val``` to ```reduce```, and we're going to pass in ```+``` as ```f```. So, what happens when we call ```reduce```? If we pass ```[0 1]``` as ```coll```, we will return the value 1, having applied ```+``` to the elements. If we pass ```[0]``` we will return 0, given there is only one element and so ```f``` is not called. What if we pass in ```[]```? We are passing an empty collection, so we just evaluate ```f```, which returns 0 in this case. All good. But what if we set ```-``` as our function? This will return -1 if we pass ```[0 1]```, and 0 if we pass ```[0]```, but will cause an error if we try to pass ```[]```, given it is not possible to evaluate ```-``` with no arguments. So, if we want to use ```reduce``` where there is a possiblity that we will be passing in an empty collection and no initial value then we need to make sure that we define a function that can be evaluated with no arguments. Alternatively, we now know that we can write our own ```reduce``` function, and we can modify it so that it defines differently what to do with an empty collection.
 
+<a name="count"></a>
 <b>COUNT</b>
 
 Now we have written our implementation of ```reduce```, let's move on to ```count```. ```count``` takes a collection and returns the number of items that it contains. It will return 0 for nil. We will build our ```my-count``` function using a TDD approach again, so we start by writing a test.
@@ -211,6 +213,7 @@ All tests pass! Now we have a test suite, let's refactor. We have already writte
 
 This successfully passes the test suite, and is now much cleaner than the code we had before.
 
+<a name="filter"></a>
 <b>FILTER</b>
 
 ```filter``` returns a lazy sequence of the items in a ```coll``` for which a predicate (```pred```) returns true. The predicate needs to be side-effect free. If a collection is not passed then ```filter``` will return a transducer, however, we will keep this outside of the scope of this post.
@@ -238,40 +241,42 @@ We will then consider each item in turn, recursing with ```(rest input)```, unti
 	(loop [input coll result []]
 		(if (empty? input)
 			(lazy-seq result)
-			(recur (rest input) (if (pred (first input))
-									(conj result (first input)) 
-									result)))))</code></pre>
+			(recur 	(rest input) 
+				(if (pred (first input))
+					(conj result (first input)) 
+					result)))))</code></pre>
 
 This passes, and we can add some further tests to check that our implementation behaves as ```filter``` should:
 
 <pre><code>(it "filter strings"
-		(should= '("a" "b" "n" "f" "q") (my-filter #(= 1 (my-count %)) ["a" "aa" "b" "n" "f" "lisp" "clojure" "q" ""])))
+		(should= 
+			'("a" "b" "n" "f" "q") 
+			(my-filter #(= 1 (my-count %)) ["a" "aa" "b" "n" "f" "lisp" "clojure" "q" ""])))
 
 	(it "filter maps"
-		(should= '([:c 101] [:d 102]) (my-filter #(> (second %) 100)
-       {:a 1
-        :b 2
-        :c 101
-        :d 102
-        :e -1})))</code></pre>
+		(should= 
+			'([:c 101] [:d 102]) 
+			(my-filter #(> (second %) 100) {:a 1 :b 2 :c 101 :d 102 :e -1})))</code></pre>
 
 
 The tests pass, but we are just converting the ```result``` to a lazy sequence at the end, whereas the real purpose of using a lazy seq is so that the computation can be <a href="http://noobtuts.com/clojure/being-lazy-in-clojure">lazy</a>.
 
-We could move our lazy-seq to in front of the recur loop, but we would still not behaving lazily. Every time we loop through we evaluate if the predicate is true, and we update our ```result``` accordingly. If we were lazy we would not evaluate until we reached the tail of the recursion.
+We could move our lazy-seq to in front of the recur loop, but we would still not be behaving lazily. Every time we loop through we evaluate if the predicate is true, and we update our ```result``` accordingly. If we were lazy we would not evaluate until we reached the tail of the recursion.
 
 In terms of laziness, there is a <a href="http://stackoverflow.com/questions/12389303/clojure-cons-vs-conj-with-lazy-seq">difference between ```conj``` and ```cons```</a>. The behaviour of ```conj``` depends on the collection type, so will need to be realised immediately. However, ```cons``` adds an item to the start of a collection, with everything else coming after, and so can be evaluated lazily. 
 
 Let's re-write our ```my-filter``` function so that it is lazy. We can start with ```lazy-seq```, and follow this by a ```when``` block, using the predicate ```(seq coll)```. This will return true if the ```coll``` is a sequence, and so will return false for empty collections, in which case ```lazy-seq``` will be evaluated. If we do have a sequence we want to apply the predicate to the first item of the collection. If the predicate returns true we want to ```cons``` the ```(first coll)``` onto the filtered collection to come, ```(my-filter pred (rest coll))```. If the predicate returns false then we simply recall ```my-filter``` with the ```(rest coll)```. Nothing will get evaluated until we reach the tail of the recursion, when the collection is empty. If we put this altogether we get:
 
 <pre><code>(defn my-filter [pred coll]
-		(lazy-seq (when (seq coll)
+	(lazy-seq 
+		(when (seq coll)
 			(if (pred (first coll))
 				(cons (first coll) (my-filter pred (rest coll))) 
 				(my-filter pred (rest coll))))))</code></pre>
 
 and our test suite still passes. We are now evaluating lazily, and we have our basic implementation of ```filter```. So, what have we learnt from writing our own version? Well, ```filter``` is evaluated lazily, which can give us efficiency benefits, but it also means that the collection type we return with our filtered data set is different from the input type. If we want to continue processing with the same collection type that we had then we will have to pass the output from filter into the required collection type, e.g. ```(into [] (my-filter even? [0 1 2 3 4 5]))``` will return ```[0 2 4]```.
 
+<a name="map"></a>
 <b>MAP</b>
 
 <i>Returns a lazy sequence consisting of the result of applying f to
@@ -285,7 +290,7 @@ Again, for the purpose of this blog post we are not going to consider the situat
 
 <pre><code>(describe "test my-map function"
 
-	(it "result empty lazy sequence when filtering for zero on an empty vector"
+	(it "result empty lazy sequence when mapping with zero? on an empty vector"
 		(should= clojure.lang.LazySeq (class (my-map zero? [])))
 		(should= 0 (my-count (my-map zero? [])))))</code></pre>
 
@@ -317,7 +322,7 @@ Now we can consider the situation where two collections are passed to ```my-map`
 	(it "stops when one list completed"
 		(should= '(6 16) (my-map #(* 2 %1 %2) [1 2] [3 4 5 6])))</code></pre>
 
-We can extend ```my-map``` to also take ```[f c1 c1]```, and we want to continue ```when``` both ```c1``` and ```c2``` are sequences. We need to apply ```f``` to the first item of both ```c1``` and ```c2``` and then recur with the rest of both collections.
+We can extend ```my-map``` to also take ```[f c1 c2]```, and we want to continue ```when``` both ```c1``` and ```c2``` are sequences. We need to apply ```f``` to the first item of both ```c1``` and ```c2``` and then recur with the rest of both collections.
 
 <pre><code>(defn my-map 
 	([f coll]
@@ -335,7 +340,7 @@ This works! So, how about when we have more than two collections. Let's add more
 	(it "maps four vectors"
 		(should= '(16 20) (my-map + [1 2] [3 4] [5 6] [7 8])))</code></pre>
 
-Now we can again extend ```my-map```, and this time take in any number of arguments ```[f c1 c2 & more]```. To handle an unknown number of arguments we can start a ```recur``` loop, setting ```c1``` to the first collection passed in, ```c2``` to the second collection, and ```r``` to the rest. We will then ```recur```, passing ```(my-map f c1 c1)``` back in as ```c1```, ```(first r)``` as ```c2``` and ```(rest r)``` as ```r```, and continue this until we only have two collections left. At this point ```(seq r)``` will return nil and we can escape from our recursive loop. We can then evaluate the final result by calling ```(my-map f c1 c1)```.
+Now we can again extend ```my-map```, and this time take in any number of arguments ```[f c1 c2 & more]```. To handle an unknown number of arguments we can start a ```recur``` loop, setting ```c1``` to the first collection passed in, ```c2``` to the second collection, and ```r``` to the rest. We will then ```recur```, passing ```(my-map f c1 c2)``` back in as ```c1```, ```(first r)``` as ```c2``` and ```(rest r)``` as ```r```, and continue this until we only have two collections left. At this point ```(seq r)``` will return nil and we can escape from our recursive loop. We can then evaluate the final result by calling ```(my-map f c1 c2)```.
 
 <pre><code>(defn my-map 
 	([f coll]
@@ -350,7 +355,7 @@ Now we can again extend ```my-map```, and this time take in any number of argume
 				(my-map f c1 c2)
 				(recur (my-map f c1 c2) (first r) (rest r))))))</code></pre>
 
-This now passes our test suite, but let's what about non-commutative functions:
+This now passes our test suite, but what about non-commutative functions? 
 
 <pre><code>	(it "maps with non-commutative functions"
 		(should= '([:a :d :g] [:b :e :h] [:c :f :i]) 
@@ -358,9 +363,9 @@ This now passes our test suite, but let's what about non-commutative functions:
 
 This test fails, because we get a lazy sequence of vectors by calling ```(my-map f c1 c2)```, and this then becomes ```c1``` for the next iteration, resulting in a multi-dimensional vector. So, how do we solve this?
 
-What we want is to convert the input collections to a single sequence, where the first item is a collection of all the first elements, the second item is a collection of all the second elements, etc. If we have this collection of reordered collections we can just map the result of applying the function to each collection in turn. We can create a single collection by adding the first collection, ```c1```, to the other collections, ```colls``` (```(cons c1 coll)```). Let's pass this concatenated collection to a function named reorder. 
+What we want is to convert the input collections to a single sequence, where the first item is a collection of all the first elements, the second item is a collection of all the second elements, etc. If we have this collection of reordered collections we can just map the result of applying the function to each collection in turn. We can create a single collection by adding the first collection, ```c1```, to the other collections, ```colls```. Let's then pass this concatenated collection to a function named reorder. 
 
-We need ```reorder``` to take the first item from each collection and map it to a new collection, and add this to all the other reordered collections until one of the collections is empty. If we put this all together we get:
+We need ```reorder``` to take the first item from each collection and map it to a new collection, and add this to all the other reordered collections to come until one of the collections is empty. If we put this all together we get:
 
 <pre><code>(declare my-map)
 
@@ -373,13 +378,13 @@ We need ```reorder``` to take the first item from each collection and map it to 
 		(lazy-seq (when (seq coll)
 				(cons (f (first coll)) (my-map f (rest coll))))))
 	([f c1 & colls]
-     	(my-map #(apply f %) (reorder (cons c1 colls)))))</code></pre>
+     		(my-map #(apply f %) (reorder (cons c1 colls)))))</code></pre>
 
 Note that becuase the functions ```my-map``` and ```reorder``` refer to each other we need to ```declare my-map``` at the top of the file.
 
 We now have much cleaner code, and it works for non-commutative functions!
 
-
+<a name="pmap"></a>
 <b>PMAP</b>
 
 Finally we are going to look at ```pmap```, which is <i>like ```map```, except ```f``` is applied in parallel</i>. This function is <i>only useful for computationally intensive functions where the time of f dominates the coordination overhead</i>.
@@ -408,8 +413,8 @@ We can test to check that the long-running-function gives the correct result, an
 
 	(it "test long-running-job time"
 		(should (< 1.0 (let [st (System/nanoTime)]
-							(long-running-job 1)
-							(/ (- (System/nanoTime) st) 1e9)))))</code></pre>
+					(long-running-job 1)
+					(/ (- (System/nanoTime) st) 1e9)))))</code></pre>
 
 If we try to do the same thing for ```(map long-running-fuction [1 2 3 4])``` the test will fail. We might expect this function to take a little over 4 s to run (the ```long-running-function``` is called four times by ```map```), but it actually completes in a fraction of a second. Why? Remember that ```map``` is lazy, and the time we are measuring is the time to make a new lazy-seq, not the time to actually execute it. Let's write a test where we call a function named ```test-time``` and pass it a map type, function and collection:
 
@@ -420,8 +425,7 @@ We can write ```test-time```, and measure the time to evaluate ```realize-lazy-s
 
 <pre><code>(defn realize-lazy-seq [map-type f c]
 	(loop [res (map-type f c)]
-    	(when res
-       		(recur (next res)))))
+    		(when res (recur (next res)))))
 
 (defn test-time [map-type f c]
 	(let [st (System/nanoTime)]
@@ -471,7 +475,7 @@ Let's now make sure that ```my-pmap``` can work with multiple collections. We ca
 	(it "test time long-running job with my-pmap and two collections"
 		(should (> 1.1 (time (test-time my-pmap long-running-job [1 2 3 4][1 2 3 4])))))</code></pre>
 
-We could get these tests to pass simply by extending ```my-pmap``` to take two collections, and using the same logic that we did for a single collection. However, this approach will suffer the same limitations as we saw for the first implementation of ```my-map```. So let's instead use the same approach that we did for ```my-map```, and convert out collections into a single sequence of reordered collections. Indeed, we can do exactly the same as ```my-map``` and also reuse the ```reorder``` function.
+We could get these tests to pass simply by extending ```my-pmap``` to take two collections, and using the same logic that we did for a single collection. However, this approach will suffer the same limitations as we saw for the first implementation of ```my-map```. So let's instead use the same approach that we did for ```my-map```, and convert out collections into a single sequence of reordered collections. Indeed, we can do exactly the same as we did for <a href="#map">```my-map```</a> and also reuse the ```reorder``` function.
 
 <pre><code>(defn my-pmap
 	([f coll]
@@ -482,17 +486,17 @@ We could get these tests to pass simply by extending ```my-pmap``` to take two c
 					acc))]
 			(my-map deref results)))
 	([f c1 & colls]
-     	(my-pmap #(apply f %) (reorder (cons c1 colls)))))</code></pre>
+     		(my-pmap #(apply f %) (reorder (cons c1 colls)))))</code></pre>
 
 This works, and we can extend our test suite to ensure that it continues to work with more collections.
 
-
+<br>
 <b>CONCLUSIONS</b>
 
 As an experienced skydiver you may feel confident about taking a first <a href="https://en.wikipedia.org/wiki/BASE_jumping">BASE jump</a>. However, there are a lot of considerations, a lot that you need to understand, before you can take the leap in relative safety. The higher altitude of a skydive means you can reach faster speeds before deploying your parachute, whereas it is normally not possible to reach terminal velocity during a BASE jump. The lower airspeeds during a BASE jump mean jumpers have less aerodynamic control of their bodies, so a clean parachute deployment is more difficult. The lower control and jumping close to a structure also vastly increases the risk of a collision, both before and after parachute deployment. As such, the inputs to the jump - the position of the jumper as they leap and the equipment that they use - are critical to a successful flight.
 
 The same requirement to really understand how everything is working is equally as relevent to software development, or any other activity for that matter, although the consequences might not be as immediately life-impacting.
 
-Every day when we write code, in whichever language we chose, our life is made easier and more efficient by the use of the core functions of the language. However, reliance on the hidden code comes at a risk, and if you don't fully understand what is happening then you risk undesired outcomes, and you may also be missing out on additional functionality. We should all strive to unveil the magic at the surface, and really dig deep to know our craft.
+Every day when we write code, in whichever language we chose, our life is made easier and more efficient by the use of the core functions of the language. However, reliance on the hidden code comes at a risk, and if you don't fully understand what is happening then you risk undesired outcomes, and you may also be missing out on additional functionality. We should all strive to unveil the magic at the surface, and really dig deep so as to better know our craft.
 
-The source code for my implementations of ```reduce```, ```count```, ```filter```, ```map``` and ```pmap``` are all available on <a href="https://github.com/jonathangraham/clojure_functions">github</a>.
+The source code for my implementations of <a href="#reduce">reduce</a>, <a href="#count">count</a>, <a href="#filter">filter</a>, <a href="#map">map</a> and <a href="#pmap">pmap</a> are all available on <a href="https://github.com/jonathangraham/clojure_functions">github</a>.
