@@ -7,14 +7,13 @@ include_social: true
 {% include JB/setup %}
 
 <section id="research" class="centered">
-  <p class="section-title"><span>Blogs</span></p>
-  <p>Life is short and opportunities are many.<br><br> My interests cover a melting pot of code, music, science and art, and these blogs will cover all of them. Sometimes the topics will be discrete, but often, as in life, they will bring together a mixture of them all. Hopefully there will be something that interests you along the way!</p>
+  <p>Life is short and opportunities are many.<br><br> My interests cover a melting pot of code, music, science and art, and my <a href="../blog.html">blogs</a> and <a href="../talks.html">talks</a> cover a blend of all of them.</p>
 </section>
 <section>
   <ul class="research">
     Recent blogs:<br> 
     {% for post in site.posts limit: 5%}
-      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}: {{ post.tagline }}</a></li>
+      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
     {% endfor %}
     <br><br>See the full list of blogs <a href="../blog.html">here</a>
   </ul>

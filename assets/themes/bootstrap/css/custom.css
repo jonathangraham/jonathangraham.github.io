@@ -38,7 +38,15 @@ body {
 }
 
  .Clojure-image {
-  background-image: url("/assets/images/Clojure.png");
+  background-image: url("/assets/images/Clojure.jpg");
+  background-repeat: no-repeat; /*repeat;*/
+  background-size: cover; /*contain;*/
+  background-attachment: fixed;
+  height: 100vh;
+}
+
+.Evolution-image {
+  background-image: url("/assets/images/evolution.gif");
   background-repeat: no-repeat; /*repeat;*/
   background-size: cover; /*contain;*/
   background-attachment: fixed;
