@@ -8,18 +8,21 @@ include_social: true
 <h1>Events</h1>
   <p><h2>Upcoming Events</h2>
     20th Nov 2015<br><a href="http://buildstuff.lt/">BuildStuff</a>, Vilnius Lithuania.<br>
-    <a href="#reactive">Reactive Systems: From Drug Development to Functional Programming.</a><br><br>
+    - <a href="#reactive">Reactive Systems: From Drug Development to Functional Programming.</a><br>
+    - <a href="#mined">Mining Minds: The Path from Coal Mining to Software Development<br><br></a>
     24th Nov 2015<br><a href="http://buildstuff.com.ua/">BuildStuff</a>, Kiev Ukraine.<br>
-    <a href="#reactive">Reactive Systems: From Drug Development to Functional Programming.</a><br><br>
-    Dec 2015<br><a href="http://yowconference.com.au/">Yow!</a>, Australia (Melbourne, Brisbane, Sydney).<br><a href="#music">Implementing the Theory of Audible Programming.</a>
+    - <a href="#reactive">Reactive Systems: From Drug Development to Functional Programming.</a><br>
+    - <a href="#mined">Mining Minds: The Path from Coal Mining to Software Development<br><br></a>
+    Dec 2015<br><a href="http://yowconference.com.au/">Yow!</a>, Australia (Melbourne, Brisbane, Sydney).<br>
+    - <a href="#music">Implementing the Theory of Audible Programming.</a>
 
   <h2>Past Events</h2>
     14th Nov 2015<br><a href="http://detroitdevday.org/">DetroitDevDay</a>, Detroit USA.<br>
-    <a href="#reactive">Reactive Systems: From Drug Development to Functional Programming.</a><br><br>
+    - <a href="#reactive">Reactive Systems: From Drug Development to Functional Programming.</a><br><br>
     6th Nov 2015<br><a href = "http://oredev.org/">Oredev</a>, Malmo Sweden.<br>
-    <a href="#mined">Mining Minds: The Path from Coal Mining to Software Development<br><br></a>
+    - <a href="#mined">Mining Minds: The Path from Coal Mining to Software Development<br><br></a>
     14th August 2015<br><a href="https://8thlight.com/">8th Light University</a>, Chicago USA.<br>
-    <a href="#science">Science of Drugs and Rock n Roll.</a>
+    - <a href="#science">Science of Drugs and Rock n Roll.</a>
     <br><br>
   </p>
 
@@ -30,7 +33,7 @@ Abstracts for available talks are listed below.
 <a name="reactive"></a>
 <p><h2>Reactive Systems: From Drug Development to Functional Programming</h2>
 <br>
-<!-- <b>Slides from my talk at DetroitDevDay 2015 can be viewed <a href="ReactiveSystems.pdf">here.</a></b><br><br> -->
+<b>Slides from the talk can be viewed <a href="ReactiveSystems.pdf">here.</a></b><br><br>
 Systems built as Reactive Systems are more flexible, loosely-coupled and scalable. This makes them easier to develop and amenable to change. They are significantly more tolerant of failure and when failure does occur they meet it with elegance rather than disaster.<br><br>
 
 The approach to the design and development of manufacturing processes for the production of new drugs within the pharmaceutical industry has changed dramatically over the last decade.  Focus is given to designing systems that are responsive to issues and constraints, through knowledge of the impact of exceeding standard operating ranges and the use of real-time analytics; resilient to failures that could occur at any point within the system; elastic to changing demands that occur during the lifecycle of manufacture through a flexible and well understood approach to scalability; and message driven, whereby the resources used and specifications required for a specific segment of the system are derived by the demands external to that segment. With Quality by Design applied throughout the development process, the industry is now beginning to reap the benefits from the flexibility that Reactive Systems provide in production.<br><br>
@@ -41,7 +44,7 @@ In this presentation we will use learning’s from the Pharmaceutical Industry t
 <a name="science"></a>
 <p><h2>Science of Drugs and Rock n Roll</h2>
 <br>
-<b>Slides from my talk at 8th Light can be viewed <a href="science_drugs_rock_roll.pdf">here.</a></b><br><br>
+<b>Watch the video from my talk at 8th Light on <a href="https://www.youtube.com/watch?v=aH9-mG8At80&feature=youtu.be">YouTube</a>, and the slides are available here <a href="science_drugs_rock_roll.pdf">here.</a></b><br><br>
 Developing a new drug and putting it into manufacture isn’t magic.  Neither is programming.  But how does someone new to either field break through the veil of mystery and understand what is really happening?<br><br>
 
 In this talk we will look at how coding music with Sonic Pi can give an introduction to the concepts of programming.  We will also use the drug development process to discuss some of the considerations of scaling a complex system into production.  From fun experimentations to commercial deployment, we will look at how gaining fundamental understanding allows us to create the illusion of magic whilst maintaining full control.<br><br> 
