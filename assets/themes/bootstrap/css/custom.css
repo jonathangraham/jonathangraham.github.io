@@ -37,8 +37,8 @@ body {
   height: 100vh;
 }
 
- .Clojure-image {
-  background-image: url("/assets/images/Clojure.jpg");
+ .clojure-blog-image {
+  background-image: url("/assets/images/SonicPiImage.png");
   background-repeat: no-repeat; /*repeat;*/
   background-size: cover; /*contain;*/
   background-attachment: fixed;
@@ -47,6 +47,14 @@ body {
 
 .Evolution-image {
   background-image: url("/assets/images/evolution.gif");
+  background-repeat: no-repeat; /*repeat;*/
+  background-size: cover; /*contain;*/
+  background-attachment: fixed;
+  height: 100vh;
+}
+
+.MAVEN-image {
+  background-image: url("/assets/images/MAVEN.jpg");
   background-repeat: no-repeat; /*repeat;*/
   background-size: cover; /*contain;*/
   background-attachment: fixed;

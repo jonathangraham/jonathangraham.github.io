@@ -24,14 +24,14 @@ include_social: true
   <section>
     <article class="research-item">
       <h2>Code</h2>
-      <p>It was through music that I was first exposed to code, and where I saw just how powerful and flexible a tool programming was. The more I spoke with top-notch software developers, the more I realised the limitless opportunities that there were to do new and awesome things. And so I have taken the plunge and switched my career to one of code. A career that has many overlaps with science, music and art, and a career that I am excitedly getting fully immersed in. <br><br> Currently, I am expanding my programming abilities from procedural hobby code to one of structured professional quality through an apprenticeship position at <a href="http://8thlight.com">8th Light</a>. I am also co-founder of <a href="http://minedminds.github.io/">Mined Minds</a>, bringing free computer programming training to Greene County, PA. </p>
+      <p>It was through music that I was first exposed to code, and where I saw just how powerful and flexible a tool programming was. The more I spoke with top-notch software developers, the more I realised the limitless opportunities that there were to do new and awesome things.<br><br>I now develop software at <a href="http://8thlight.com">8th Light</a> and am a co-founder of <a href="http://minedminds.github.io/">Mined Minds</a>, bringing free computer programming training to rural Pennsylvania.</p>
       <div class="more">
         <a href="code.html" class="button">programming</a>
       </div>
     </article>
     <article class="research-item">
       <h2>Music</h2>
-      <p>Having a club-full of revellers dancing to the music you are creating live through the writing of code is a truly amazing experience, and one that I would recommend to everyone! <br><br>As <a href="http://meta-ex.com">Meta-eX</a>, we harnessed the power of SuperCollider through the Overtone platform to generate music, be it gently evolving soundscapes or pulsating beats, by writing Clojure code in the Emacs Live text editor. <br><br>I have also played live solo gigs using <a href="http://sonic-pi.net">SonicPi</a>, and have used this tool to teach programming concepts to non-programmers of all ages.</p>
+      <p>Having a club-full of revellers dancing to the music you are creating live through the writing of code is a truly amazing experience, and one that I would recommend to everyone! <br><br>As <a href="http://meta-ex.com">Meta-eX</a>, we harnessed the power of SuperCollider through the Overtone platform to generate music, be it gently evolving soundscapes or pulsating beats, by writing Clojure code in the Emacs Live text editor. <br><br>I now play live solo gigs, run workshops, and teach programming concepts to non-programmers of all ages using <a href="http://sonic-pi.net">SonicPi</a>.</p>
       <div class="more">
         <a href="music.html" class="button">music</a>
       </div>
@@ -42,7 +42,7 @@ include_social: true
   <section>
     <article class="research-item">
       <h2>Science</h2>
-      <p>I am passionate about designing and developing robust and scalable systems, which are well understood and can be modified to react to changes in production environment or customer requirements. To many people this passion sounds very similar to software development, but mine actually stems from the process of manufacturing drugs for GlaxoSmithKline.<br><br>Following the completion of my PhD in Organic Chemistry, I spent over a decade in drug development. During that time I led multiple projects from early discovery through to manufacture and commercialisation, authored several papers and presented at many international conferences.   </p>
+      <p>I am passionate about designing and developing robust and scalable systems, which are well understood and can be modified to react to changes in production environment or customer requirements. To many people this passion sounds very similar to software development, but mine actually stems from the process of manufacturing drugs for GlaxoSmithKline.<br><br>Following the completion of my PhD in Organic Chemistry, I spent over a decade in drug development. During that time I led multiple projects from early discovery through to manufacture and commercialisation, authored several papers and presented at many international conferences. I now use my science background to help teach and present about software development concepts.   </p>
       <div class="more">
         <a href="science.html" class="button">science</a>
       </div>

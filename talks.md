@@ -7,16 +7,18 @@ include_social: true
 
 <h1>Events</h1>
   <p><h2>Upcoming Events</h2>
-    20th Nov 2015<br><a href="http://buildstuff.lt/">BuildStuff</a>, Vilnius Lithuania.<br>
-    - <a href="#reactive">Reactive Systems: From Drug Development to Functional Programming.</a><br>
-    - <a href="#mined">Mining Minds: The Path from Coal Mining to Software Development<br><br></a>
+    11-12 Feb 2016<br><a href="http://clojureremote.com/">Clojure Remote</a>.<br>
+    - <a href="#clojure">Understanding Core Clojure Functions.</a><br><br>
+
+  <h2>Past Events</h2>
+    4th, 8th and 11th Dec 2015<br><a href="http://yowconference.com.au/">Yow! Australia</a>, Melbourne, Brisbane, and Sydney.<br>
+    - <a href="#music">Implementing the Theory of Audible Programming.</a><br><br>
     24th Nov 2015<br><a href="http://buildstuff.com.ua/">BuildStuff</a>, Kiev Ukraine.<br>
     - <a href="#reactive">Reactive Systems: From Drug Development to Functional Programming.</a><br>
     - <a href="#mined">Mining Minds: The Path from Coal Mining to Software Development<br><br></a>
-    Dec 2015<br><a href="http://yowconference.com.au/">Yow!</a>, Australia (Melbourne, Brisbane, Sydney).<br>
-    - <a href="#music">Implementing the Theory of Audible Programming.</a>
-
-  <h2>Past Events</h2>
+    20th Nov 2015<br><a href="http://buildstuff.lt/">BuildStuff</a>, Vilnius Lithuania.<br>
+    - <a href="#reactive">Reactive Systems: From Drug Development to Functional Programming.</a><br>
+    - <a href="#mined">Mining Minds: The Path from Coal Mining to Software Development<br><br></a>
     14th Nov 2015<br><a href="http://detroitdevday.org/">DetroitDevDay</a>, Detroit USA.<br>
     - <a href="#reactive">Reactive Systems: From Drug Development to Functional Programming.</a><br><br>
     6th Nov 2015<br><a href = "http://oredev.org/">Oredev</a>, Malmo Sweden.<br>

@@ -3,7 +3,6 @@ layout: post
 title: Understanding core Clojure Functions
 tagline: Implementing versions of <a href="#reduce">reduce</a>, <a href="#count">count</a>, <a href="#filter">filter</a>, <a href="#map">map</a> and <a href="#pmap">pmap</a>   
 include_social: true
-image: Clojure-image
 ---
 {% include JB/setup %}
 
