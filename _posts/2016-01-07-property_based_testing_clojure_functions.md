@@ -41,7 +41,7 @@ All 10000 tests passed! The generators are peudorandom, and start with the simpl
 
 Of course, Clojure can apply ```count``` to more than just strings. We can count bytes (```gen/bytes```), and vectors. Vectors of intergers can be generated with ```(gen/vec gen/int)```, but vectors can also contain any clojure value: ```(gen/vector gen/any)```. We can do a similar thing with lists, sets and maps. Maps require both a keyword and value, but both of these can be any clojure value (```(gen/map gen/any gen/any)```). 
 
-We could write a separate property-based test for each of these collection types, but it would be great if we could randomly select one each time. We can do this with the combinator ```gen/one-of```. This generates elements from a vector of given generators, picking generators at random. Let's pull this generator into a separate function in its own namespace so that it will be easily reusable, and call it from our test. The tests will take longer to run now that they can have large collections with any type of colujre values, so for now let's reduce the number of tests that we run. 
+We could write a separate property-based test for each of these collection types, but it would be great if we could randomly select one each time. We can do this with the combinator ```gen/one-of```. This generates elements from a vector of given generators, picking generators at random. Let's pull this generator into a separate function in its own namespace so that it will be easily reusable, and call it from our test. The tests will take longer to run now that they can have large collections with any type of clojure values, so for now let's reduce the number of tests that we run. 
 
 <pre><code>(def colls
   (gen/one-of [
@@ -56,7 +56,7 @@ We could write a separate property-based test for each of these collection types
   (prop/for-all [c colls]
     (= (count c) (my-count c))))</code></pre>   
 
-We can run this and it still passes - our implementation of count gives the same result as clojure count across the different collection types. This gives us vastly more test coverage than our unit tests had done.
+We can run this and it still passes - our implementation of count gives the same result as clojure count across the different collection types. This gives us vastly more coverage of the possible inputs than our unit tests had done.
 
 Let's now move on to ```reduce```, and again we want to test that our implementation behaves the same as the core clojure function. 
 
@@ -84,7 +84,7 @@ We can test our filter implementation in a very similar way. ```filter``` requir
     (prop/for-all [c colls b gen/boolean]
         (= (filter #(bool-fn b %) c) (my-filter #(bool-fn b %) c))))</code></pre>
 
-No we have tests passing for filter as well. 
+Now we have tests passing for filter as well. 
 
 ```map``` takes as arguments a function and any number of collections. Again, the function that we pass can be simple - we just need to test that our implementation can accept it. Let's use ```list``` as this can be applied to any Clojure collections.
 
@@ -99,8 +99,8 @@ We are successfully testing our implemention of ```map``` with random numbers of
 Lastly is pmap. We can test that our implementation returns the same result as ```pmap``` in the same way that we tested for ```map```:
 
 <pre><code>(defspec my-pmap-property-test 50
-    (prop/for-all [c (gen/not-empty (gen/vector colls))]
-        (= (apply pmap list (concat c)) (apply my-pmap list (concat c)))))</code></pre>
+    (prop/for-all [cs (gen/not-empty (gen/vector colls))]
+        (= (apply pmap list (concat cs)) (apply my-pmap list (concat cs)))))</code></pre>
 
 The key behaviour we have to test for, though, is that for process intensive / long-running functions it processes collections with at least two items quicker than ```map``` does, i.e. it works in parallel.
 
@@ -139,8 +139,8 @@ And we can time how long our map functions, which was explained in the previous 
 We can now assert, for all collections that have more than one item, that our pmap implemention will return quicker than Clojure map. 
 
 <pre><code>(defspec my-pmap-time-property-test 50
-    (prop/for-all [c (gen/not-empty (gen/vector colls-more-one-element))]
-        (> (apply test-time map long-running-job (concat c)) (apply test-time my-pmap long-running-job (concat c)))))</code></pre>
+    (prop/for-all [cs (gen/not-empty (gen/vector colls-more-one-element))]
+        (> (apply test-time map long-running-job (concat cs)) (apply test-time my-pmap long-running-job (concat cs)))))</code></pre>
 
 Our final tests all pass!
 
@@ -149,5 +149,7 @@ Our final tests all pass!
 We now have property-based tests covering all of our implementations of the Clojure functions, and we can have much more confidence that our functions work as we want. The tests look at the expected behaviour of the code, rather than specific outputs, and there is considerably less test code to maintain compared to the unit tests.
 
 Does this all mean that the unit tests were not required? Not at all. The unit tests helped me to design out my code, and to understand how the functions worked. They just didn't give me the confidence that I needed that I had covered the scope of inputs that are possible, and this is really where the property-based tests shine.
+
+Although I didn't need to change my function implementation code at all, I did not write property-based tests that all passed first time. It took a couple of iterations to write the generators and properties that actually tested what I needed, and that were clean and concise. As I was debugging my failing tests, the shrink feature of test.check was very useful. This takes a failing test and shrinks it to the smallest example that still fails. As an example, when I first wrote the tests for map and pmap, I wrote ```map list (concat cs)```, which will just create a list of the sequence of collections. What I actually needed was to use ```apply``` to pass each of the collections within the sequence to the map function. My mistake only became evident in the timed-test for pmap, and the shrunk result showed me that I had a collection with a single item, even though I'd generated collections that required more than one element. Obviously, trying to run a single operation in parallel is not going to be any quicker, hence the test failure.  
 
 The source code for the implementations of the Clojure functions and associated tests are on <a href="https://github.com/jonathangraham/clojure_functions">github</a>.
