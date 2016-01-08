@@ -6,6 +6,9 @@ include_social: true
 ---
 {% include JB/setup %}
 
+<b>EDIT Jan 8th, 2016:</b> Read about property-based tests for these functions <a href="http://jonathangraham.github.io/2016/01/07/property_based_testing_clojure_functions/">here</a>. 
+<br><br>
+
 Every programming language has a bunch of core functions already defined for us. This is great - it means we can quickly get on building what we want, without having to worry about writing everything from scratch.
 
 This power and ease of use does come with a cost, though. Do we really understand how the functions are working, and if not, how do we really know the power of the magic that we are wielding? Are we in danger of breaking our code through the misuse of functionality that we thought, but didn't truly, understand? And are we utilizing the functions to their full effect, or missing out on some of the benefits of the language?
