@@ -6,7 +6,7 @@ include_social: true
 ---
 {% include JB/setup %}
 
-###Introduction
+<h3>Introduction</h3>
 
 There are lots of approaches to learning a new language, and [Clojure](https://clojure.org/) has many great resources. For those that are active learners, the [Clojure koans](http://clojurekoans.com/) and [4Clojure](https://www.4clojure.com/) exercises provide a wonderful opportunity to explore the language. There are also plenty of books to get you started, including [Carin Meier's](https://twitter.com/gigasquid) [Living Clojure](http://shop.oreilly.com/product/0636920034292.do) that takes a very hands-on approach to learning (read a [review](http://jonathangraham.github.io/2015/07/28/Book%20Review%20for%20Living%20Clojure/) for more details).  
 
@@ -15,7 +15,7 @@ Another approach when trying to gain a fundamental understanding of how a langua
 We will implement models of `reduce`, `count`, `filter`, `map`, and `pmap`, and in doing so will explore, amongst other things, recursion, lazy sequences, and futures. The goal for the models of the core functions that we implement is to generate the same output as those produced by the core language, given any valid input. For the purpose of this blog, we will not be considering the processing efficiency of the functions that we write.
 
 
-###REDUCE
+<h3>REDUCE</h3>
 
 `reduce` is the backbone of many of the Clojure *sequence* functions. Before we start implementing it, what exactly is a sequence?
 
@@ -61,7 +61,7 @@ A consequence of `reduce` evaluating `f` with no arguments is that functions lik
 
 Another thing we may have learned about `reduce` is that even if we have a function that requires two arguments, we know that we can successfully pass this to `reduce` with only a single collection. We can demonstrate this with `add`: `(defn add [x y] (+ x y))`. If we just pass a single argument to `add` we will get an argument error. However, calling `(reduce add [1])` will return 1, because the first item of the collection will be defined as `val`, and given the rest of the collection is empty, `reduce` will just return `val` with the function not called.
 
-###COUNT
+<h3>COUNT</h3>
 
 Many other functions become easy to write now that we have written a version of `reduce`. We can demonstrate this with `count`:
 
@@ -75,7 +75,7 @@ We need to set an initial `val` to 0, so that `my-reduce` returns 0 for an empty
 	(defn my-count [coll]
 		(my-reduce (fn [result _](inc result)) 0 coll))
 
-###FILTER
+<h3>FILTER</h3>
 
 `(filter pred)` `(filter pred coll)`
 *Returns a lazy sequence of the items in coll for which (pred item) returns true. pred must be free of side-effects. Returns a transducer when no collection is provided.*
@@ -120,7 +120,7 @@ For the purposes of this blog we will not cover the scenario where no collection
 
 One thing to note about `filter` is that it will return a lazy seq, rather than the input collection type. If we want to continue processing with the same collection type as the input, we will have to pass the output from filter `into` the required collection type, e.g. `(into [] (my-filter even? [0 1 2 3 4 5]))` will return `[0 2 4]`.
 
-###MAP
+<h3>MAP</h3>
 
 `(map f)` `(map f coll)` `(map f c1 c2)` `(map f c1 c2 c3)` `(map f c1 c2 c3 & colls)`
 *Returns a lazy sequence consisting of the result of applying f to the set of first items of each coll, followed by applying f to the set of second items in each coll, until any one of the colls is exhausted.  Any remaining items in other colls are ignored. Function f should accept number-of-colls arguments. Returns a transducer when no collection is provided.*
@@ -164,7 +164,7 @@ We need `reorder` to take the first item from each collection and map it to a ne
 		([f c1 & colls]
 	     		(my-map #(apply f %) (reorder (cons c1 colls)))))
 
-###PMAP
+<h3>PMAP</h3>
 
 Finally we are going to look at `pmap`.
 
@@ -208,7 +208,7 @@ Let's now make sure that `my-pmap` can work with multiple collections. Using the
 		([f c1 & colls]
 	    		(my-pmap #(apply f %) (reorder (cons c1 colls)))))
 
-##Conclusions
+<h3>Conclusions</h3>
 
 We can learn a lot about a language by writing our own implementations of some of the core functions. In writing versions of `reduce`, `count`, `filter`, `map`, and `pmap`, not only have we seen how these work, but we have also explored a lot more of the functionality of Clojure, including the use of `recur`, `lazy-seq`, and `futures`.
 
