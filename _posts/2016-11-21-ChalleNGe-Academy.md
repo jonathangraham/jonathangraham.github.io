@@ -22,7 +22,7 @@ Due to access restrictions, we did not have the students push their code to gith
 
 The Cadets still had lots of features that they wanted to add - like displaying the word at the end of the game, making the choices case insensitive, storing game results, having different difficulty levels - and several were excited about exploring the potential of a future career in code.
 
-We covered a lot in the weekend. The Cadets wouldn't be able to write the code from scratch on their own again, but that wasn't the point. They saw how to break down a problem, and that coding each individual part was not that complicated. Not all of them would do it again - for some spending full days at the computer would not be their choice - but others saw an opportunity that they never thought they could do or that would be fun.  
+We covered a lot in the weekend. The Cadets surpassed all my expectations - every one of them was fully engaged, they all completed their app, and they worked together to debug each others code. They probably won't be able to rewrite the code from scratch on their own again, but that wasn't the point. They saw how to break down a problem, and that coding each individual part is not that complicated. Not all of them would do it again - for some spending full days at the computer would not be their choice - but others saw an opportunity that they never thought they could do or that would be fun. 
 
 If you've never done any teaching before and you have some free time then I'd certainly recommend that you consider giving it a go. You learn a lot, it can be very rewarding, and is often a lot of fun. Feel free to get in touch with me if you'd like any advice on how to get started.
 <hr>
