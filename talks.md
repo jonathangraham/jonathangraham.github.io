@@ -1,52 +1,50 @@
 ---
 layout: page
-title: Events and Presentations
+title: Talks
 include_social: true
 ---
 {% include JB/setup %}
 
-<h1>Events</h1>
-  <p><h2>Upcoming Events</h2>
-    2nd August 2016<br><a href="http://www.esynergy-solutions.co.uk/event/deep-learning-clojure">eSynergySolutions webinar</a>.<br>
-    - <a href="#clojure">Deep learning: Clojure</a><br><br>
-    10-12th August 2016<br><a href="http://www.meetup.com/merchise/events/231274385/">MonadLibre, Cuba</a><br>
-    - <a href="#clojure">Deep learning: Clojure</a><br><br>
-    18-20th August 2016<br><a href="http://abstractions.io/">Abstractions, Pennsylvania</a>.<br>
-    - <a href="#mined">Reviving a Community with Code</a><br><br>
-    9th September 2016<br><a href="http://2016.reactive.geecon.org/">Geecon Sopot, Poland</a>.<br>
-    - <a href="#reactive">Reactive Systems: From Drug Development to Functional Programming.</a><br><br>
+<h2>Events</h2>
+  <p>
     21st October 2016<br><a href="http://scna.softwarecraftsmanship.org/">SCNA, Los Angeles</a>.<br>
-    - <a href="#mined">Reviving a Community with Code</a><br><br>
-  <h2>Past Events</h2>
+    <a href="#mined">- Reviving a Community with Code</a><br><br>
+    9th September 2016<br><a href="http://2016.reactive.geecon.org/">Keynote at Geecon Sopot, Poland</a>.<br>
+    <a href="#reactive">- Reactive Systems: From Drug Development to Functional Programming.</a><br><br> 
+    18-20th August 2016<br><a href="http://abstractions.io/">Abstractions, Pennsylvania</a>.<br>
+    <a href="#mined">- Reviving a Community with Code</a><br><br>
+    2nd August 2016<br>
+    <a href="http://www.esynergy-solutions.co.uk/event/deep-learning-clojure">eSynergySolutions webinar</a>.<br>
+    <a href="#clojure">- Deep learning: Clojure</a><br><br>
     30th April 2016<br>
     <a href="http://chicagocodecamp.com/">Chicago Code Camp</a>.<br>
-    - <a href="#clojure">Learning the Fundamentals of Clojure</a><br><br>
+    <a href="#clojure">- Learning the Fundamentals of Clojure</a><br><br>
     7th Mar 2016<br>
     <a href="https://qconlondon.com/">Qcon London</a>.<br>
-    - <a href="#clojure">Understanding Core Clojure Functions.</a><br><br>
+    <a href="#clojure">- Understanding Core Clojure Functions.</a><br><br>
     12th Feb 2016<br>
     <a href="http://clojureremote.com/">Clojure Remote</a>.<br>
-    - <a href="#clojure">Understanding Core Clojure Functions.</a><br><br>
+    <a href="#clojure">- Understanding Core Clojure Functions.</a><br><br>
     4th, 8th and 11th Dec 2015<br><a href="http://yowconference.com.au/">Yow! Australia</a>, Melbourne, Brisbane, and Sydney.<br>
-    - <a href="#music">Implementing the Theory of Audible Programming.</a><br><br>
+    <a href="#music">- Implementing the Theory of Audible Programming.</a><br><br>
     24th Nov 2015<br><a href="http://buildstuff.com.ua/">BuildStuff</a>, Kiev Ukraine.<br>
-    - <a href="#reactive">Reactive Systems: From Drug Development to Functional Programming.</a><br>
-    - <a href="#mined">Mining Minds: The Path from Coal Mining to Software Development<br><br></a>
+    <a href="#reactive">- Reactive Systems: From Drug Development to Functional Programming.</a><br>
+    <a href="#mined">- Mining Minds: The Path from Coal Mining to Software Development<br><br></a>
     20th Nov 2015<br><a href="http://buildstuff.lt/">BuildStuff</a>, Vilnius Lithuania.<br>
-    - <a href="#reactive">Reactive Systems: From Drug Development to Functional Programming.</a><br>
-    - <a href="#mined">Mining Minds: The Path from Coal Mining to Software Development<br><br></a>
+    <a href="#reactive">- Reactive Systems: From Drug Development to Functional Programming.</a><br>
+    <a href="#mined">- Mining Minds: The Path from Coal Mining to Software Development<br><br></a>
     14th Nov 2015<br><a href="http://detroitdevday.org/">DetroitDevDay</a>, Detroit USA.<br>
-    - <a href="#reactive">Reactive Systems: From Drug Development to Functional Programming.</a><br><br>
+    <a href="#reactive">- Reactive Systems: From Drug Development to Functional Programming.</a><br><br>
     6th Nov 2015<br><a href = "http://oredev.org/">Oredev</a>, Malmo Sweden.<br>
-    - <a href="#mined">Mining Minds: The Path from Coal Mining to Software Development<br><br></a>
+    <a href="#mined">- Mining Minds: The Path from Coal Mining to Software Development<br><br></a>
     14th August 2015<br><a href="https://8thlight.com/">8th Light University</a>, Chicago USA.<br>
-    - <a href="#science">Science of Drugs and Rock n Roll.</a>
+    <a href="#science">- Science of Drugs and Rock n Roll.</a>
     <br><br>
   </p>
 
 
 
-<h1>Presentations</h1>
+<h2>Presentations</h2>
 Abstracts for available talks are listed below.
 <a name="reactive"></a>
 <p><h2>Reactive Systems: From Drug Development to Functional Programming</h2>
