@@ -9,22 +9,22 @@ include_social: true
   <p>
     21st October 2016<br><a href="http://scna.softwarecraftsmanship.org/">SCNA, Los Angeles</a>.<br>
     <a href="#mined">- Reviving a Community with Code</a><br><br>
-    9th September 2016<br><a href="http://2016.reactive.geecon.org/">Keynote at Geecon Sopot, Poland</a>.<br>
-    <a href="#reactive">- Reactive Systems: From Drug Development to Functional Programming.</a><br><br> 
-    18-20th August 2016<br><a href="http://abstractions.io/">Abstractions, Pennsylvania</a>.<br>
+    9th September 2016<br><a href="http://2016.reactive.geecon.org/">Keynote at Geecon Sopot, Poland</a><br>
+    <a href="#reactive">- Reactive Systems: From Drug Development to Functional Programming</a><br><br> 
+    18-20th August 2016<br><a href="http://abstractions.io/">Abstractions, Pennsylvania</a><br>
     <a href="#mined">- Reviving a Community with Code</a><br><br>
     2nd August 2016<br>
-    <a href="http://www.esynergy-solutions.co.uk/event/deep-learning-clojure">eSynergySolutions webinar</a>.<br>
+    <a href="http://www.esynergy-solutions.co.uk/event/deep-learning-clojure">eSynergySolutions webinar</a><br>
     <a href="#clojure">- Deep learning: Clojure</a><br><br>
     30th April 2016<br>
-    <a href="http://chicagocodecamp.com/">Chicago Code Camp</a>.<br>
+    <a href="http://chicagocodecamp.com/">Chicago Code Camp</a><br>
     <a href="#clojure">- Learning the Fundamentals of Clojure</a><br><br>
     7th Mar 2016<br>
     <a href="https://qconlondon.com/">Qcon London</a>.<br>
-    <a href="#clojure">- Understanding Core Clojure Functions.</a><br><br>
+    <a href="#clojure">- Understanding Core Clojure Functions</a><br><br>
     12th Feb 2016<br>
     <a href="http://clojureremote.com/">Clojure Remote</a>.<br>
-    <a href="#clojure">- Understanding Core Clojure Functions.</a><br><br>
+    <a href="#clojure">- Understanding Core Clojure Functions</a><br><br>
     4th, 8th and 11th Dec 2015<br><a href="http://yowconference.com.au/">Yow! Australia</a>, Melbourne, Brisbane, and Sydney.<br>
     <a href="#music">- Implementing the Theory of Audible Programming.</a><br><br>
     24th Nov 2015<br><a href="http://buildstuff.com.ua/">BuildStuff</a>, Kiev Ukraine.<br>
