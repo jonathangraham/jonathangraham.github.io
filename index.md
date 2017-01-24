@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Jonathan Graham
+title: Dr. Jonathan Graham
 tagline: Code and Music; Science and Art
 include_social: true
 ---
