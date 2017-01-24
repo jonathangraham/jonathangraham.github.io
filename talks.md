@@ -5,7 +5,7 @@ include_social: true
 ---
 {% include JB/setup %}
 
-<h2>Events</h2>
+<h2>Recent Events</h2>
 <p>
     21st October 2016<br>
     <a href="http://scna.softwarecraftsmanship.org/">SCNA, Los Angeles</a><br>
