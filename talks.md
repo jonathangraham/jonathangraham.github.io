@@ -5,6 +5,14 @@ include_social: true
 ---
 {% include JB/setup %}
 
+<section id="research" class="centered">
+  <div class="col-lg-10 col-lg-offset-1 ">
+    <p>
+    Talks and workshops on a range on subjects are available, including Reviving a Community with Code, Clojure Fundamentals, Reactive Systems, Implementing the Theory of Audible Programming, and Practical Implementations of Agile Development. Please get in touch if you are interested in a presentation or workshop at your event or business. 
+    </p>
+  </div>
+</section>
+
 <h2>Recent Events</h2>
 <p>
     21st October 2016<br>
